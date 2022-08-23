@@ -3,15 +3,13 @@ package web.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import web.dao.UserDao;
 import web.model.User;
-import web.service.UserService;
 import web.service.User_Service;
 
 @Controller
 //@RequestMapping(value = "/")
 public class UserController {
-    private User_Service userService;
+    private final User_Service userService;
 
     public UserController(User_Service userService) {
         this.userService = userService;

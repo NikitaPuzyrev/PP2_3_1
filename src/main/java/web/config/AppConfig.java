@@ -24,7 +24,7 @@ import javax.sql.DataSource;
 public class AppConfig {
 
 
-    private Environment env;
+    private final Environment env;
 
     public AppConfig(Environment env) {
         this.env = env;

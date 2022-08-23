@@ -18,7 +18,7 @@ public class UserService implements User_Service {
     @Override
     @Transactional
     public List<User> index() {
-         return userDao.index();
+        return userDao.index();
     }
 
     @Override

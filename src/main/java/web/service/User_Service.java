@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import web.model.User;
 
 import java.util.List;
+
 @Service
 public interface User_Service {
     List<User> index();
