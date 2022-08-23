@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>New Person</title>
+    <title>New User</title>
 </head>
 <body>
-<form th:method="POST" th:action="@{/users}" th:object="${person}">
+<form th:method="POST" th:action="@{/users}" th:object="${user}">
     <label for="name">Enter name:</label>
     <input type="text" th:field="*{name}" id="name"/>
     <br/>
