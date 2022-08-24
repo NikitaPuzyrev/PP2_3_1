@@ -7,7 +7,7 @@ import web.model.User;
 import web.service.User_Service;
 
 @Controller
-//@RequestMapping(value = "/")
+
 public class UserController {
     private final User_Service userService;
 
@@ -16,14 +16,14 @@ public class UserController {
     }
 
     @GetMapping("/")
-    public String index(Model model) {
-        model.addAttribute("users", userService.index());
+    public String getAllUsers(Model model) {
+        model.addAttribute("users", userService.getAllUsers());
         return "users/listUsers";
     }
 
     @GetMapping("users/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("user", userService.show(id));
+    public String showUserById(@PathVariable("id") int id, Model model) {
+        model.addAttribute("user", userService.showUserById(id));
         return "users/show";
     }
 
@@ -38,19 +38,22 @@ public class UserController {
         userService.save(user);
         return "redirect:/";
     }
-@GetMapping("users/{id}/edit")
-    public String edit(Model model, @PathVariable("id") int id){
-        model.addAttribute("user", userService.show(id));
+
+    @GetMapping("users/{id}/edit")
+    public String edit(Model model, @PathVariable("id") int id) {
+        model.addAttribute("user", userService.showUserById(id));
         return "users/edit";
-}
-@PatchMapping("users/{id}")
-    public String update(@ModelAttribute("user") User user, @PathVariable("id") int id){
+    }
+
+    @PatchMapping("users/{id}")
+    public String update(@ModelAttribute("user") User user, @PathVariable("id") int id) {
         userService.update(id, user);
         return "redirect:/";
-}
-@DeleteMapping("users/{id}")
-public String delete(@PathVariable("id") int id){
+    }
+
+    @DeleteMapping("users/{id}")
+    public String delete(@PathVariable("id") int id) {
         userService.delete(id);
         return "redirect:/";
-}
+    }
 }

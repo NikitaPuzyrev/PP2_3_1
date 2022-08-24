@@ -8,37 +8,39 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class UserDao {
+public class UserDao implements User_Dao {
     @PersistenceContext
     private EntityManager entityManager;
     private List<User> users;
 
-    public List<User> index() {
+    @Override
+    public List<User> getAllUsers() {
         return entityManager.createQuery("select  p from User p", User.class).getResultList();
     }
 
-    public User show(int id) {
+    @Override
+    public User showUserById(int id) {
         users = entityManager.createQuery("select  u from User u", User.class).getResultList();
         return users.stream().filter(user -> user.getId() == id).findAny().orElse(null);
     }
 
-
+    @Override
     public void save(User user) {
         entityManager.persist(user);
     }
 
-
+    @Override
     public void update(int id, User updatedUser) {
-        User userToBeUpdated = show(id);
+        User userToBeUpdated = showUserById(id);
         userToBeUpdated.setAge(updatedUser.getAge());
         userToBeUpdated.setName(updatedUser.getName());
         entityManager.merge(updatedUser);
     }
 
-    //@Transactional
+    @Override
     public void delete(int id) {
         users = entityManager.createQuery("select  u from User u", User.class).getResultList();
-        User userToBeDeleted = show(id);
+        User userToBeDeleted = showUserById(id);
         entityManager.remove(userToBeDeleted);
     }
 }
